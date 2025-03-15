@@ -92,6 +92,75 @@
   .cancel-button:hover {
     background-color: #c8c8c8;
   }
+  /* Contenedor de productos */
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Diseño flexible para diferentes tamaños de pantalla */
+  gap: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f9f9f9; /* Fondo claro para contraste */
+  border-radius: 10px;
+}
+
+/* Estilo para cada tarjeta */
+.producto-card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Imagen de los productos */
+.producto-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* Mantener proporciones */
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+/* Títulos */
+.producto-card h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+/* Descripción */
+.producto-card p {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+/* Botón Ver Detalle */
+.producto-card button {
+  background-color: #84b6f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.producto-card button:hover {
+  background-color: #6f9fd6;
+}
+
+/* Animación al pasar el mouse sobre la tarjeta */
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
   
   
   

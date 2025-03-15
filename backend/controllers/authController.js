@@ -33,3 +33,14 @@ exports.login = async (req, res) => {
   const token = jwt.sign({ id: user._id, rol: user.rol.rol }, secretKey, { expiresIn: '1h' });
   res.json({ token, user });
 };
+
+// Nueva función para manejar logout
+exports.logout = (req, res) => {
+  try {
+    // Enviar respuesta de éxito
+    res.status(200).json({ message: 'Sesión cerrada exitosamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Hubo un problema al cerrar sesión' });
+  }
+};
+

@@ -1,0 +1,49 @@
+.detalle-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.detalle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detalle-card img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.detalle-card h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.detalle-card p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.detalle-card button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detalle-card button:hover {
+  background-color: #45a049;
+}
+
+  

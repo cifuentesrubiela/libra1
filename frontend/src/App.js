@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import Login from './pages/Login';
+import Home from './pages/Home';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-import Contacto from './pages/Contacto'; // Importa las páginas correspondientes
-import GestionProductos from './pages/GestionProductos'; // Páginas de administración
+import Contacto from './pages/Contacto';
+import GestionProductos from './pages/GestionProductos';
 import GestionVentas from './pages/GestionVentas';
 import ReporteVentas from './pages/ReporteVentas';
 import Reportes from './pages/Reportes';
+import VerDetalle from './pages/VerDetalle';
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false); // Estado para controlar el modal
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleLoginClick = () => {
-    setShowLoginModal(true); // Mostrar el modal cuando se hace clic en "Login"
+    setShowLoginModal(true);
   };
 
   return (
@@ -24,14 +25,16 @@ const App = () => {
       <Navbar handleLoginClick={handleLoginClick} />
       <Sidebar isAdmin={isAdmin} />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route 
-          path="/login" 
-          element={<Login showModal={showLoginModal} setShowModal={setShowLoginModal} setIsAdmin={setIsAdmin} />} />
+          path="/home" 
+          element={<Home showModal={showLoginModal} setShowModal={setShowLoginModal} setIsAdmin={setIsAdmin} />} 
+        />
         <Route path="/register" element={<Register showModal={showLoginModal} setShowModal={setShowLoginModal} />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/gestion-productos" element={<GestionProductos />} />
+        <Route path="/detalle/:id" element={<VerDetalle />} />
         <Route path="/gestion-ventas" element={<GestionVentas />} />
         <Route path="/reporte-ventas" element={<ReporteVentas />} />
         <Route path="/reportes" element={<Reportes />} />
@@ -41,6 +44,7 @@ const App = () => {
 };
 
 export default App;
+
 
 
 
