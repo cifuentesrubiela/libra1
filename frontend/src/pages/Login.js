@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Login.css';
+import { Link } from 'react-router-dom'; // Asegúrate de importar Link
 
 const Login = ({ showModal, setShowModal, setIsAdmin }) => {
   const [form, setForm] = useState({ correo_usuario: '', password: '', rememberMe: false });
@@ -21,7 +21,9 @@ const Login = ({ showModal, setShowModal, setIsAdmin }) => {
       if (form.rememberMe) {
         localStorage.setItem('rememberMe', true);
       }
-      setIsAdmin(response.data.user.rol.rol === 'Administrador');
+      
+      // Comprobar el rol para establecer isAdmin
+      setIsAdmin(response.data.user.rol === 'ADMIN'); // Asumimos que 'ADMIN' es el rol de administrador
       setShowModal(false); // Cerrar el modal después de login exitoso
     } catch (error) {
       alert('Login fallido');
@@ -70,7 +72,9 @@ const Login = ({ showModal, setShowModal, setIsAdmin }) => {
         </form>
 
         <div className="links">
-          <a href="/registro">¿No tienes cuenta? Regístrate</a>
+          <Link to="/register">
+            <a href="#">¿No tienes cuenta? Regístrate</a>
+          </Link>
           <a href="/olvide-mi-contrasena">¿Olvidaste tu contraseña?</a>
         </div>
 

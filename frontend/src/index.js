@@ -1,11 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';  // Cambiar la importación
-import App from './App';
+import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));  // Usar createRoot
-root.render(
+
+import Axios from 'axios';
+
+// Establecer la URL base
+Axios.defaults.baseURL = 'http://localhost:4000'; // Backend
+
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );

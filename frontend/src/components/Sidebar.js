@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';  // Asegúrate de importar Link
 
 const Sidebar = ({ isAdmin }) => {
   return (
     <div className="sidebar">
       <ul>
-        <li>Contacto</li>
+        <li><Link to="/contacto">Contacto</Link></li>
         {isAdmin && (
           <>
-            <li>Gestión de Productos</li>
-            <li>Gestión de Ventas</li>
-            <li>Gestión de Reporte de Ventas</li>
-            <li>Reportes</li>
+            <li><Link to="/gestion-productos">Gestión de Productos</Link></li>
+            <li><Link to="/gestion-ventas">Gestión de Ventas</Link></li>
+            <li><Link to="/reporte-ventas">Reporte de Ventas</Link></li>
+            <li><Link to="/reportes">Reportes</Link></li>
           </>
         )}
       </ul>
@@ -19,3 +20,5 @@ const Sidebar = ({ isAdmin }) => {
 };
 
 export default Sidebar;
+
+
