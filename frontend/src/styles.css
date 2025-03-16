@@ -1,0 +1,272 @@
+/* Reset y estilos globales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #84b6f4;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --border-color: #ccc;
+  --header-color: #4a90e2;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin-left: 220px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--header-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Logo */
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-right: auto;
+}
+
+/* Barra de búsqueda */
+.navbar .search-bar {
+  position: relative;
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.navbar .search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.navbar .search-results {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.navbar .search-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar .search-item:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Botones */
+.button-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.button-primary:hover {
+  background-color: #0056b3;
+}
+
+.button-primary.login {
+  order: 1;
+}
+
+.button-primary.carrito {
+  order: 2;
+}
+
+.button-primary.cerrar-sesion {
+  order: 3;
+}
+
+.button-primary.agregar-producto {
+  order: 4;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background-color: #10da86;
+  height: calc(100vh - 60px); /* Ajustar al tamaño del header */
+  position: fixed;
+  top: 60px; /* Comienza justo debajo del header */
+  left: 0;
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+/* Estilos principales */
+.container {
+  max-width: 1400px;
+  margin: 30px auto 0 auto;
+  padding: 10px;
+}
+
+/* Contenedor de los productos */
+.productos-container {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que las cards se envuelvan a la siguiente fila */
+  gap: 20px; /* Espaciado entre las cards */
+  margin: 5px auto 0 auto; /* Margen superior ajustado */
+  padding: 10px;
+  justify-content: flex-start; /* Alinear las cards a la izquierda */
+}
+
+
+/* Estilo de cada card de producto */
+.producto-card {
+  flex: 1 1 calc(16.66% - 20px); /* 6 cards por fila */
+  flex-grow: 0;  /* No crecerá más allá del tamaño asignado */
+  flex-shrink: 1; /* Puede reducirse si es necesario */
+  box-sizing: border-box; /* Incluir padding y border dentro del ancho */
+  border: 1px solid #ccc;
+  padding: 15px; /* Ajusta el padding a tu preferencia */
+  text-align: center; /* Centrar el contenido */
+  background-color: #f9f9f9; /* Color de fondo */
+  border-radius: 8px; /* Bordes redondeados */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación */
+}
+
+.producto-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Animación en las cards */
+.producto-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  text-align: center; /* Centrar el texto */
+  margin-top: 60px; /* Margen superior de 70px */
+}
+
+/* Modales */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.cancel-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e0e0e0;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.cancel-button:hover {
+  background-color: #c8c8c8;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1024px) {
+  .producto-card {
+    flex: 1 1 calc(25% - 20px); /* Mostrar 4 cards por fila */
+  }
+}
+
+@media (max-width: 768px) {
+  .producto-card {
+    flex: 1 1 calc(33.33% - 20px); /* Mostrar 3 cards por fila */
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-card {
+    flex: 1 1 calc(50% - 20px); /* Mostrar 2 cards por fila */
+  }
+}
+
+@media (max-width: 320px) {
+  .producto-card {
+    flex: 1 1 100%; /* Mostrar 1 card por fila */
+  }
+}
+

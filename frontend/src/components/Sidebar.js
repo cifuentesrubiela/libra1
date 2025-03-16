@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  // Asegúrate de importar Link
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ isAdmin }) => {
   return (
@@ -20,5 +20,9 @@ const Sidebar = ({ isAdmin }) => {
 };
 
 export default Sidebar;
+
+
+
+
 
 

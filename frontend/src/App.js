@@ -15,6 +15,8 @@ import VerDetalle from './pages/VerDetalle';
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showLogoutMenu, setShowLogoutMenu] = useState(false); // Nuevo estado
+  const [userName, setUserName] = useState(null);
 
   const handleLoginClick = () => {
     setShowLoginModal(true);
@@ -22,13 +24,24 @@ const App = () => {
 
   return (
     <Router>
-      <Navbar handleLoginClick={handleLoginClick} />
+      <Navbar 
+        handleLoginClick={handleLoginClick} 
+        userName={userName} 
+        setUserName={setUserName} 
+        showLogout={showLoginModal}
+        setShowLogout={setShowLoginModal}
+      />
       <Sidebar isAdmin={isAdmin} />
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route 
           path="/home" 
-          element={<Home showModal={showLoginModal} setShowModal={setShowLoginModal} setIsAdmin={setIsAdmin} />} 
+          element={<Home 
+            showModal={showLoginModal} 
+            setShowModal={setShowLoginModal} 
+            setIsAdmin={setIsAdmin} 
+            setUserName={setUserName} 
+          />} 
         />
         <Route path="/register" element={<Register showModal={showLoginModal} setShowModal={setShowLoginModal} />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -44,8 +57,5 @@ const App = () => {
 };
 
 export default App;
-
-
-
 
 

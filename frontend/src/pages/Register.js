@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Register.css'; // Asegúrate de tener el archivo CSS para el estilo del modal
+import '../styles.css'; // Asegúrate de tener estilos CSS para el modal
 
 const Register = ({ showModal, setShowModal }) => {
   const [form, setForm] = useState({
@@ -10,10 +9,8 @@ const Register = ({ showModal, setShowModal }) => {
     correo_usuario: '',
     celular_usuario: '',
     password: '',
-    rol: 'usuario', // Establecer un valor por defecto, en este caso 'usuario'
+    rol: 'usuario', // Valor por defecto
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -24,19 +21,19 @@ const Register = ({ showModal, setShowModal }) => {
     try {
       await axios.post('http://localhost:4000/api/auth/register', form);
       alert('Registro exitoso');
-      navigate('/login');
+      setShowModal(false); // Cerrar modal después del registro exitoso
     } catch (error) {
       alert('Error en el registro');
-      console.error('Error en el registro', error); // Para más detalles
+      console.error('Error en el registro', error);
     }
   };
-  
+
   const handleCancel = () => {
-    setShowModal(false); // Cerrar el modal
-    navigate('/login'); // Redirigir al login
+    setShowModal(false); // Simplemente cierra el modal
   };
 
-  if (!showModal) return null; // Si no debe mostrar el modal, no renderizamos nada
+  // Si el modal no debe mostrarse, no renderiza nada
+  if (!showModal) return null;
 
   return (
     <div className="modal">
@@ -73,11 +70,7 @@ const Register = ({ showModal, setShowModal }) => {
             placeholder="Contraseña"
             onChange={handleChange}
           />
-          <select
-            name="rol"
-            value={form.rol}
-            onChange={handleChange}
-          >
+          <select name="rol" value={form.rol} onChange={handleChange}>
             <option value="USER">Usuario</option>
             <option value="ADMIN">Administrador</option>
           </select>
@@ -92,4 +85,3 @@ const Register = ({ showModal, setShowModal }) => {
 };
 
 export default Register;
-

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Asegúrate de importar Link
+import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode'; // Importación corregida // Importación correcta de jwt-decode
+import Register from './Register';
+import '../styles.css';
 
-const Home = ({ showModal, setShowModal, setIsAdmin }) => {
+const Home = ({ showModal, setShowModal, setIsAdmin, rolUsuario, setUserName }) => {
   const [form, setForm] = useState({ correo_usuario: '', password: '', rememberMe: false });
-  const [productos, setProductos] = useState([]); // Estado para los productos
+  const [productos, setProductos] = useState([]);
+  const [showRegisterModal, setShowRegisterModal] = useState(false); // Estado para modal Register
 
   // Función para obtener los productos desde la API
   const obtenerProductos = async () => {
@@ -25,33 +29,36 @@ const Home = ({ showModal, setShowModal, setIsAdmin }) => {
   };
 
   const handleCheckboxChange = (e) => {
-    setForm({ ...form, rememberMe: e.target.checked });
+    setForm({ ...form, rememberMe: e.target.checked }); // Actualiza el estado del checkbox
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:4000/api/auth/login', form);
-      localStorage.setItem('token', response.data.token);
-      if (form.rememberMe) {
-        localStorage.setItem('rememberMe', true);
-      }
-
-      // Comprobar el rol para establecer isAdmin
-      setIsAdmin(response.data.user.rol === 'ADMIN'); // Asumimos que 'ADMIN' es el rol de administrador
-      setShowModal(false); // Cerrar el modal después de login exitoso
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+  
+      const decoded = jwtDecode(token);
+      setIsAdmin(decoded.rol === 'ADMIN'); // Actualiza el estado de admin
+      setUserName(decoded.nombre_usuario); // Actualiza el nombre del usuario
+      setShowModal(false);
     } catch (error) {
       alert('Login fallido');
     }
   };
 
   const handleCancel = () => {
-    setShowModal(false); // Cerrar el modal si el usuario hace clic en cancelar
+    setShowModal(false);
+  };
+
+  const handleOpenRegister = () => {
+    setShowRegisterModal(true); // Abrir modal de registro
   };
 
   return (
     <div>
-      {/* Modal de Login */}
+      {/* Modal Login */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -73,35 +80,41 @@ const Home = ({ showModal, setShowModal, setIsAdmin }) => {
                 value={form.password}
                 required
               />
-
               <div className="checkbox-container">
                 <input
                   type="checkbox"
                   name="rememberMe"
                   checked={form.rememberMe}
-                  onChange={handleCheckboxChange}
+                  onChange={handleCheckboxChange} // Asegúrate de usar esta función
                 />
                 <label htmlFor="rememberMe">Recordarme</label>
               </div>
-
               <button type="submit">Iniciar Sesión</button>
             </form>
-
             <div className="links">
-              <Link to="/register">
-                <a href="#">¿No tienes cuenta? Regístrate</a>
-              </Link>
+              {/* Abrir modal de registro al hacer clic */}
+              <button onClick={handleOpenRegister} className="link-button">
+                ¿No tienes cuenta? Regístrate
+              </button>
               <a href="/olvide-mi-contrasena">¿Olvidaste tu contraseña?</a>
             </div>
-
-            <button className="cancel-button" onClick={handleCancel}>Cancelar</button>
+            <button className="cancel-button" onClick={handleCancel}>
+              Cancelar
+            </button>
           </div>
         </div>
       )}
 
-      {/* Productos */}
-      <div className="productos-container">
+      {/* Modal Register */}
+      {showRegisterModal && (
+        <Register showModal={showRegisterModal} setShowModal={setShowRegisterModal} />
+      )}
+
+      {/* Sección de Productos */}
+      <div>
         <h2>Productos</h2>
+      </div>
+      <div className="productos-container">
         {productos.map((producto) => (
           <div className="producto-card" key={producto._id}>
             <img src={producto.imagen_producto} alt={producto.nombre_producto} />
@@ -111,15 +124,22 @@ const Home = ({ showModal, setShowModal, setIsAdmin }) => {
             <button>
               <Link to={`/detalle/${producto._id}`}>Ver Detalle</Link>
             </button>
-            {/* <button>Ver Detalle</button> */}
           </div>
         ))}
+      </div>
+
+      {/* Botones Condicionales */}
+      <div className="botones">
+        {rolUsuario === 'ADMIN' ? (
+          <button className="agregar-producto">Agregar Producto</button>
+        ) : (
+          <button className="carrito">Carrito</button>
+        )}
       </div>
     </div>
   );
 };
 
 export default Home;
-
 
 
