@@ -7,6 +7,10 @@ LIBRA es una aplicación desarrollada con el stack MERN (MongoDB, Express.js, Re
 - **Gestión de productos**: Los administradores pueden agregar, editar y eliminar productos.
 - **Carrito de compras**: Los usuarios pueden añadir productos a su carrito para su posterior compra.
 
+## NOTA
+
+Se debe tener previamente instalado e iniciado el servicio Mongodb y se debe crear la base de datos "libra".
+
 ## Instalación y Ejecución
 
 ### 1. Clonar el repositorio
@@ -34,4 +38,5 @@ node server   # Iniciar el servidor backend
 - **Backend**: Node.js, Express.js
 - **Base de datos**: MongoDB con Mongoose
 - **Autenticación**: JSON Web Token (JWT)
+
 
