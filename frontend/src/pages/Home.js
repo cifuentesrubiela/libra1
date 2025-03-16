@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { jwtDecode } from 'jwt-decode'; 
 import { CarritoContext } from '../context/CarritoContext';
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Register from './Register';
 import '../styles.css';
 
@@ -13,6 +13,7 @@ const Home = ({ showModal, setShowModal, setIsAdmin, rolUsuario, setUserName, se
   const [idUsuario, setIdUsuario] = useState(null);
   const { agregarProducto } = useContext(CarritoContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Si se llega con el state openLogin y no hay usuario logueado, activar el modal de inicio de sesión
   useEffect(() => {
@@ -39,6 +40,11 @@ const Home = ({ showModal, setShowModal, setIsAdmin, rolUsuario, setUserName, se
       return;
     }
     agregarProducto(producto);
+  };
+
+  // Función para manejar el clic en "Ver Detalle"
+  const handleVerDetalle = (productoId) => {
+    navigate(`/detalle/${productoId}`);
   };
 
   const obtenerProductos = async () => {
@@ -215,7 +221,13 @@ const Home = ({ showModal, setShowModal, setIsAdmin, rolUsuario, setUserName, se
               <button onClick={() => handleAgregarProducto(producto)}>
                 Añadir al Carrito
               </button>
-              <Link to={`/detalle/${producto._id}`}>Ver Detalle</Link>
+              {/* Reemplazar Link por button */}
+              <button 
+                className="btn-ver-detalle" 
+                onClick={() => handleVerDetalle(producto._id)}
+              >
+                Ver Detalle
+              </button>
             </div>
           ))}
         </div>
@@ -234,8 +246,3 @@ const Home = ({ showModal, setShowModal, setIsAdmin, rolUsuario, setUserName, se
 };
 
 export default Home;
-
-
-
-
-

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CarritoContext } from '../context/CarritoContext';
 import { generarFactura } from '../utils/FacturaGenerator';
-import {jwtDecode} from 'jwt-decode'; // Importación correcta de jwt-decode
+import {jwtDecode} from 'jwt-decode';
 
 const GestionVentas = () => {
   // Contexto del carrito, con un valor por defecto para evitar errores
@@ -26,12 +26,7 @@ const GestionVentas = () => {
       return;
     }
 
-    // Verificar si se pudo obtener el ID de usuario
-    // if (!idUsuario) {
-    //   alert('Inicia sesión para finalizar la venta.');
-    //   return;
-    // }
-
+  
     // Generar factura y limpiar carrito
     generarFactura(carrito, total, metodoPago);
     limpiarCarrito(idUsuario);

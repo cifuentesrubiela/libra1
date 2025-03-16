@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode'; // Importación corregida
+import { jwtDecode } from 'jwt-decode'; 
 import '../styles.css';
 
 const Navbar = ({ handleLoginClick, userName, setUserName, showLogout, setShowLogout }) => {
@@ -130,8 +130,6 @@ const Navbar = ({ handleLoginClick, userName, setUserName, showLogout, setShowLo
         </button>
       )}
 
-      {/* Botón del carrito de compras */}
-      {/* <button className="button-primary carrito">Carrito de Compras</button> */}
       <button className="button-primary carrito">
         <Link to="/carrito">Carrito de Compras</Link>
       </button>

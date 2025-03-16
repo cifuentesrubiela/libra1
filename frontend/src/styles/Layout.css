@@ -24,7 +24,7 @@
     height: 100vh; /* Ahora ocupa toda la altura porque no hay navbar */
     left: 0;
     top: 0; /* Empieza desde arriba porque no hay navbar */
-    background-color: #222;
+    background-color: #1E3A5F;
     color: #fff;
     z-index: 1000;
     padding: 20px 0;
@@ -35,7 +35,7 @@
   /* Estilos para la información del usuario en el sidebar */
   .sidebar .user-info {
     padding: 15px 20px;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #fff;
     margin-bottom: 20px;
     position: relative;
   }
@@ -54,9 +54,6 @@
     align-items: center;
   }
   
-  .sidebar .user-button:hover {
-    color: #007bff;
-  }
   
   .sidebar .user-button::after {
     content: "▼";
@@ -100,7 +97,7 @@
   }
   
   .sidebar a:hover {
-    background-color: #333;
+    background-color: #1E3A5F;
     color: #fff;
     border-left-color: #007bff;
   }
@@ -113,7 +110,7 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid #fff;
     margin-bottom: 15px;
     color: #fff;
   }
