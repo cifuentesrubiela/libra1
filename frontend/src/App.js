@@ -14,6 +14,7 @@ import ReporteVentas from './pages/ReporteVentas';
 import Reportes from './pages/Reportes';
 import VerDetalle from './pages/VerDetalle';
 import { jwtDecode } from 'jwt-decode';
+import './styles/Layout.css'; // Importamos el archivo CSS para el layout
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -21,6 +22,7 @@ const App = () => {
   const [userName, setUserName] = useState(null);
   const [usuario, setUsuario] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   // Función para manejar el login: decodifica el token y establece el usuario
   const handleLogin = (token) => {
@@ -102,77 +104,86 @@ const App = () => {
   return (
     <CarritoProvider>
       <Router>
-        <Navbar
-          handleLoginClick={handleLoginClick}
-          userName={userName}
-          setUserName={setUserName}
-          showLogout={userName !== null}
-          setShowLogout={setShowLoginModal}
-          isAuthenticated={isAuthenticated}
-        />
-        <Sidebar isAdmin={isAdmin} />
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route
-            path="/home"
-            element={
-              <Home 
-                showModal={showLoginModal} 
-                setShowModal={setShowLoginModal} 
-                setIsAdmin={setIsAdmin} 
-                rolUsuario={usuario?.rol} 
-                setUserName={setUserName} 
-                setUsuario={setUsuario}
-                isAuthenticated={isAuthenticated}
-                setIsAuthenticated={setIsAuthenticated}
-              />
-            }
+        {/* Mostrar Navbar solo si NO es administrador */}
+        {!isAdmin && (
+          <Navbar
+            handleLoginClick={handleLoginClick}
+            userName={userName}
+            setUserName={setUserName}
+            showLogout={userName !== null}
+            setShowLogout={setShowLogout}
+            isAuthenticated={isAuthenticated}
           />
-          <Route
-            path="/login"
-            element={
-              <Home 
-                showModal={true} 
-                setShowModal={setShowLoginModal} 
-                setIsAdmin={setIsAdmin} 
-                rolUsuario={usuario?.rol}
-                setUserName={setUserName} 
-                setUsuario={setUsuario}
-                isAuthenticated={isAuthenticated}
-                setIsAuthenticated={setIsAuthenticated}
-              />
-            }
+        )}
+        
+        {/* Mostrar Sidebar solo si es administrador */}
+        {isAdmin && (
+          <Sidebar 
+            isAdmin={isAdmin} 
+            userName={userName} 
+            setUserName={setUserName} 
+            setShowLogout={setShowLogout} 
           />
-          <Route 
-            path="/register" 
-            element={<Register showModal={showLoginModal} setShowModal={setShowLoginModal} />} 
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/gestion-productos" element={<GestionProductos />} />
-          <Route path="/detalle/:id" element={<VerDetalle />} />
-          <Route path="/carrito" element={
-            <Carrito 
-              usuario={usuario} 
-              showLoginModal={showLoginModal} 
-              setShowLoginModal={setShowLoginModal}
-              isAuthenticated={isAuthenticated}
+        )}
+        
+        {/* Ajustar la clase del contenido principal según el tipo de usuario */}
+        <div className={`main-content ${isAdmin ? 'admin-view' : 'user-view'}`}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route
+              path="/home"
+              element={
+                <Home 
+                  showModal={showLoginModal} 
+                  setShowModal={setShowLoginModal} 
+                  setIsAdmin={setIsAdmin} 
+                  rolUsuario={usuario?.rol} 
+                  setUserName={setUserName} 
+                  setUsuario={setUsuario}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              }
             />
-          } />
-          <Route path="/gestion-ventas" element={<GestionVentas />} />
-          <Route path="/reporte-ventas" element={<ReporteVentas />} />
-          <Route path="/reportes" element={<Reportes />} />
-        </Routes>
+            <Route
+              path="/login"
+              element={
+                <Home 
+                  showModal={true} 
+                  setShowModal={setShowLoginModal} 
+                  setIsAdmin={setIsAdmin} 
+                  rolUsuario={usuario?.rol}
+                  setUserName={setUserName} 
+                  setUsuario={setUsuario}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
+                />
+              }
+            />
+            <Route 
+              path="/register" 
+              element={<Register showModal={showLoginModal} setShowModal={setShowLoginModal} />} 
+            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/gestion-productos" element={<GestionProductos />} />
+            <Route path="/detalle/:id" element={<VerDetalle />} />
+            <Route path="/carrito" element={
+              <Carrito 
+                usuario={usuario} 
+                showLoginModal={showLoginModal} 
+                setShowLoginModal={setShowLoginModal}
+                isAuthenticated={isAuthenticated}
+              />
+            } />
+            <Route path="/gestion-ventas" element={<GestionVentas />} />
+            <Route path="/reporte-ventas" element={<ReporteVentas />} />
+            <Route path="/reportes" element={<Reportes />} />
+          </Routes>
+        </div>
       </Router>
     </CarritoProvider>
   );
 };
 
 export default App;
-
-
-
-
-
-
-
