@@ -131,10 +131,21 @@ const Navbar = ({ handleLoginClick, userName, setUserName, showLogout, setShowLo
       )}
 
       {/* Botón del carrito de compras */}
-      <button className="button-primary carrito">Carrito de Compras</button>
+      {/* <button className="button-primary carrito">Carrito de Compras</button> */}
+      <button className="button-primary carrito">
+        <Link to="/carrito">Carrito de Compras</Link>
+      </button>
     </nav>
   );
 };
 
 export default Navbar;
+
+
+
+
+
+
+
+
 

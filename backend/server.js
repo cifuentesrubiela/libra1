@@ -5,6 +5,7 @@ const connectDB = require('./db');  // Importar la conexión a la base de datos
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const productoRoutes = require('./routes/producto'); // Importar las rutas de productos
+const ventasRoutes = require('./routes/ventas');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/productos', productoRoutes);  // Ruta de productos
+app.use('/api/ventas', ventasRoutes);
 
 // Conectar a la base de datos
 connectDB();  // Llamar a la función que conecta con MongoDB

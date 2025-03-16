@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles.css'; // Asegúrate de tener estilos CSS para el modal
+import '../styles.css';
 
 const Register = ({ showModal, setShowModal }) => {
   const [form, setForm] = useState({
@@ -9,7 +9,7 @@ const Register = ({ showModal, setShowModal }) => {
     correo_usuario: '',
     celular_usuario: '',
     password: '',
-    rol: 'usuario', // Valor por defecto
+    rol: 'USER', // Valor por defecto que coincide con el enum del modelo
   });
 
   const handleChange = (e) => {
@@ -19,12 +19,17 @@ const Register = ({ showModal, setShowModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:4000/api/auth/register', form);
+      const response = await axios.post('http://localhost:4000/api/auth/register', form);
+      console.log("Respuesta del registro:", response.data);
       alert('Registro exitoso');
       setShowModal(false); // Cerrar modal después del registro exitoso
     } catch (error) {
-      alert('Error en el registro');
-      console.error('Error en el registro', error);
+      console.error('Error en el registro:', error);
+      if (error.response && error.response.data) {
+        alert(`Error en el registro: ${error.response.data.error}`);
+      } else {
+        alert('Error en el registro');
+      }
     }
   };
 
@@ -41,44 +46,57 @@ const Register = ({ showModal, setShowModal }) => {
         <h2>Registrar Usuario</h2>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="number"
             name="num_documento_usuario"
-            placeholder="Documento"
+            placeholder="Número de Documento"
             onChange={handleChange}
+            value={form.num_documento_usuario}
+            required
           />
           <input
             type="text"
             name="nombre_usuario"
             placeholder="Nombre"
             onChange={handleChange}
+            value={form.nombre_usuario}
+            required
           />
           <input
             type="email"
             name="correo_usuario"
             placeholder="Correo"
             onChange={handleChange}
+            value={form.correo_usuario}
+            required
           />
           <input
             type="text"
             name="celular_usuario"
             placeholder="Celular"
             onChange={handleChange}
+            value={form.celular_usuario}
           />
           <input
             type="password"
             name="password"
             placeholder="Contraseña"
             onChange={handleChange}
+            value={form.password}
+            required
           />
-          <select name="rol" value={form.rol} onChange={handleChange}>
+          <select 
+            name="rol" 
+            value={form.rol} 
+            onChange={handleChange}
+          >
             <option value="USER">Usuario</option>
             <option value="ADMIN">Administrador</option>
           </select>
           <button type="submit">Registrar</button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            Cancelar
+          </button>
         </form>
-        <div className="modal-actions">
-          <button type="button" onClick={handleCancel}>Cancelar</button>
-        </div>
       </div>
     </div>
   );
