@@ -492,3 +492,18 @@ h2, h3 {
   color: var(--header-color);
 }
 
+
+
+/* Estilo para la imagen del logo */
+.logo-libelula {
+  width: 50px;        /* Ajusta según el tamaño que quieras */
+  height: auto;       /* Mantén la proporción de la imagen */
+  margin-right: 1rem; /* Espacio entre el logo y el texto */
+}
+
+/* Estilo para el título */
+.titulo {
+  font-size: 1.5rem; /* Tamaño de fuente */
+  color: #333;       /* Color de texto */
+  margin: 0;         /* Elimina márgenes por defecto */
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles.css';
+import logo from '../assets/img/logo512.png'; // Ajusta la ruta según tu estructura
 
 const GestionProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -86,8 +87,8 @@ const GestionProductos = () => {
   return (
     <div>
       <div className="header">
-        <img src="header-logo.png" alt="Logo de Libelula Dorada" />
-        <h1>Libelula Dorada</h1>
+        <img className="logo-libelula" src={logo} alt="Logo de Libelula Dorada" />
+        <h1 className='titulo'>Libelula Dorada</h1>
       </div>
       <h2>Productos Disponibles</h2>
       <div className="container">
