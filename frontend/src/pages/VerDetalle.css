@@ -35,7 +35,7 @@
 
 .detalle-card button {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #1E3A5F;
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,7 +43,7 @@
 }
 
 .detalle-card button:hover {
-  background-color: #45a049;
+  background-color: #1E3A5F;
 }
 
   
